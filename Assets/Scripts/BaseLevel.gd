@@ -14,8 +14,9 @@ func register_player(player):
 	
 func create_player():
 	var playerInstance = playerScene.instance()
-	add_child_below_node(playerInstance, currentPlayerNode)
+	add_child_below_node(currentPlayerNode,playerInstance)
 	register_player(playerInstance)
+	playerInstance.position = spawnPosition
 	
 func on_player_died():
 	currentPlayerNode.queue_free()
