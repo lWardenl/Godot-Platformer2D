@@ -1,23 +1,21 @@
 extends Node
 
 var playerScene = preload("res://Assets/Scenes/Player.tscn")
-var spawnPosition = Vector2.ZERO
-var currentPlayerNode = null
 
 func _ready():
-	spawnPosition = $Player.global_position
 	register_player($Player)
+	register_player($Player2)
 	
 func register_player(player):
-	currentPlayerNode = player
-	currentPlayerNode.connect("died", self, "on_player_died")
+	player.connect("died", self, "on_player_died")
 	
-func create_player():
+func create_player(suffix,position):
 	var playerInstance = playerScene.instance()
-	add_child_below_node(currentPlayerNode,playerInstance)
+	get_node("/root/BaseLevel").add_child(playerInstance)
 	register_player(playerInstance)
-	playerInstance.position = spawnPosition
+	playerInstance.position = position
+	playerInstance.playerSuffix = suffix
 	
-func on_player_died():
-	currentPlayerNode.queue_free()
-	create_player()
+func on_player_died(suffix,player):
+	player.queue_free()
+	create_player(suffix,player.position)

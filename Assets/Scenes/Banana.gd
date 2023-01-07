@@ -5,4 +5,4 @@ func _ready():
 
 
 func _physics_process(delta):
-	position += transform.x;
+	position += transform.x * 7;

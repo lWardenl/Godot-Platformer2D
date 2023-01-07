@@ -17,6 +17,8 @@ var currentShot = 0
 
 var bananaScene = preload("res://Assets/Scenes/Banana.tscn")
 
+export var playerSuffix = "0"
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	$"Hazard Area".connect("area_entered", self, "on_hazard_area_entered")
@@ -39,7 +41,7 @@ func _physics_process(delta):
 			hasDoubleJump = false;
 		$CoyoteTimer.stop()
 		
-	if(velocity.y < 0 && !Input.is_action_pressed("jump")):
+	if(velocity.y < 0 && !Input.is_action_pressed("jump" + playerSuffix)):
 		velocity.y += gravity * fallMultiplier * delta
 	else:
 		velocity.y += gravity * delta
@@ -57,7 +59,7 @@ func _physics_process(delta):
 		currentShot -= delta
 		currentShot = max(currentShot,0)
 
-	if (Input.is_action_just_pressed("shoot")):
+	if (Input.is_action_just_pressed("shoot" + playerSuffix)):
 		shoot()
 
 	handle_animations()
@@ -65,8 +67,8 @@ func _physics_process(delta):
 
 func get_movement_vector():
 	var moveVector = Vector2.ZERO
-	moveVector.x = Input.get_action_strength("move_right") - Input.get_action_strength("move_left")
-	moveVector.y = -1 if Input.is_action_just_pressed("jump") else 0
+	moveVector.x = Input.get_action_strength("move_right" + playerSuffix) - Input.get_action_strength("move_left" + playerSuffix)
+	moveVector.y = -1 if Input.is_action_just_pressed("jump" + playerSuffix) else 0
 	return moveVector
 	
 func handle_animations():
@@ -83,7 +85,7 @@ func handle_animations():
 		$AnimatedSprite.flip_h = true if moveVector.x > 0 else false
 
 func on_hazard_area_entered(area2d):
-	emit_signal("died")
+	emit_signal("died",playerSuffix,self)
 
 func shoot():
 	if (currentShot > 0):
@@ -92,8 +94,10 @@ func shoot():
 	currentShot = shootTime
 
 	var banana = bananaScene.instance()
-	# add_child_below_node(get_node("/root/BaseLevel"),banana)
 	get_node("/root/BaseLevel").add_child(banana)
-	banana.global_position = position
+	banana.global_position = position - Vector2(0,10)
 	if (!$AnimatedSprite.flip_h):
+		banana.position.x -= 18
 		banana.rotate(PI)
+	else:
+		banana.position.x += 18

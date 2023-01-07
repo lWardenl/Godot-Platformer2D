@@ -5,7 +5,7 @@
 [ext_resource path="res://Assets/Player/character_0001.png" type="Texture" id=3]
 
 [sub_resource type="RectangleShape2D" id=4]
-extents = Vector2( 5, 11 )
+extents = Vector2( 5, 9.5 )
 
 [sub_resource type="CircleShape2D" id=3]
 radius = 14.0
@@ -44,7 +44,7 @@ collision_layer = 16384
 collision_mask = 16384
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hazard Area"]
-position = Vector2( 0, -7 )
+position = Vector2( 0, -5.5 )
 shape = SubResource( 4 )
 
 [node name="Pickup Area" type="Area2D" parent="."]
@@ -56,6 +56,7 @@ position = Vector2( 0, -12 )
 shape = SubResource( 3 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+modulate = Color( 0.937255, 0.180392, 0.180392, 1 )
 frames = SubResource( 2 )
 animation = "Idle"
 playing = true
