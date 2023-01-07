@@ -11,11 +11,13 @@ config_version=4
 [application]
 
 config/name="2D Platformer Course"
-run/main_scene="res://Assets/Scenes/BaseLevel.tscn"
+run/main_scene="res://Assets/Scenes/Arena.tscn"
 config/icon="res://icon.png"
 
 [display]
 
+window/size/width=320
+window/size/height=180
 window/size/resizable=false
 window/size/fullscreen=true
 window/size/always_on_top=true
