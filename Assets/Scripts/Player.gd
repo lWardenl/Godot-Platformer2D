@@ -1,6 +1,5 @@
 extends KinematicBody2D
 
-
 signal died
 
 var gravity = 1000
@@ -13,13 +12,18 @@ var fallMultiplier = 4
 
 var hasDoubleJump = false
 
+var shootTime = 1
+var currentShot = 0
+
+var bananaScene = preload("res://Assets/Scenes/Banana.tscn")
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	$"Hazard Area".connect("area_entered", self, "on_hazard_area_entered")
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _physics_process(delta):
 	var moveVector = get_movement_vector()
 	
 	velocity.x += moveVector.x * horizontalAcceleration * delta
@@ -48,7 +52,14 @@ func _process(delta):
 		
 	if(is_on_floor()):
 		hasDoubleJump = true
-	
+
+	if (currentShot > 0):
+		currentShot -= delta
+		currentShot = max(currentShot,0)
+
+	if (Input.is_action_just_pressed("shoot")):
+		shoot()
+
 	handle_animations()
 
 
@@ -73,3 +84,16 @@ func handle_animations():
 
 func on_hazard_area_entered(area2d):
 	emit_signal("died")
+
+func shoot():
+	if (currentShot > 0):
+		return
+	
+	currentShot = shootTime
+
+	var banana = bananaScene.instance()
+	# add_child_below_node(get_node("/root/BaseLevel"),banana)
+	get_node("/root/BaseLevel").add_child(banana)
+	banana.global_position = position
+	if (!$AnimatedSprite.flip_h):
+		banana.rotate(PI)
