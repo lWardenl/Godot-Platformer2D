@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/Splat - Gaming Sound Effect (HD).mp3-449e866e619a016f87258e5fe9193b1b.mp3str"
+
+[deps]
+
+source_file="res://Assets/Audio/Splat - Gaming Sound Effect (HD).mp3"
+dest_files=[ "res://.import/Splat - Gaming Sound Effect (HD).mp3-449e866e619a016f87258e5fe9193b1b.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0
