@@ -109,7 +109,7 @@ func on_hazard_area_entered(_area2d):
 	if (playerLives < 1):
 		var winScreen = winUI.instance()
 		get_tree().root.add_child(winScreen)
-		winScreen.get_node("Text").bbcode_text = "Player " + str(- playerIndex + 2) + " Wins!"
+		winScreen.get_node("Text").bbcode_text = "[center]Player " + str(- playerIndex + 2) + " Wins![/center]"
 		get_tree().paused = true
 		yield(get_tree().create_timer(1.0), "timeout")
 		get_tree().paused = false
