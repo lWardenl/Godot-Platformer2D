@@ -10,9 +10,6 @@
 [ext_resource path="res://Assets/Sprites/Players/Player 1/Sprite-0004.png" type="Texture" id=8]
 [ext_resource path="res://Assets/Sprites/Players/Player 1/attack1.png" type="Texture" id=9]
 
-[sub_resource type="RectangleShape2D" id=4]
-extents = Vector2( 5, 5.5 )
-
 [sub_resource type="SpriteFrames" id=2]
 animations = [ {
 "frames": [ ExtResource( 9 ), ExtResource( 3 ) ],
@@ -39,7 +36,10 @@ animations = [ {
 [sub_resource type="CircleShape2D" id=5]
 radius = 7.51665
 
-[node name="Player" type="KinematicBody2D" groups=["player"]]
+[sub_resource type="RectangleShape2D" id=4]
+extents = Vector2( 5, 4.75 )
+
+[node name="Player2" type="KinematicBody2D" groups=["player"]]
 scale = Vector2( 2, 2 )
 script = ExtResource( 1 )
 playerSuffix = "_2"
@@ -48,24 +48,24 @@ playerSuffix = "_2"
 wait_time = 0.1
 one_shot = true
 
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+position = Vector2( -4.5, 1 )
+scale = Vector2( -1, 1 )
+frames = SubResource( 2 )
+animation = "Attack"
+frame = 1
+playing = true
+offset = Vector2( 0, -4 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 0, -2.5 )
+shape = SubResource( 5 )
+
 [node name="Hazard Area" type="Area2D" parent="."]
-position = Vector2( -5, 6.5 )
+position = Vector2( -3.5, 5 )
 collision_layer = 16384
 collision_mask = 16384
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hazard Area"]
 position = Vector2( 3, -7.25 )
 shape = SubResource( 4 )
-
-[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
-position = Vector2( -2, 10.5 )
-scale = Vector2( -1, 1 )
-frames = SubResource( 2 )
-animation = "Attack"
-frame = 1
-playing = true
-offset = Vector2( 0, -12 )
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( -1.5, -1 )
-shape = SubResource( 5 )

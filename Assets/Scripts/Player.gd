@@ -125,9 +125,9 @@ func shoot():
 
 	var weapon = weaponScene.instance()
 	get_node("/root/BaseLevel").add_child(weapon)
-	weapon.global_position = position - Vector2(0,10)
+	weapon.position = position
+	weapon.rotation = $AnimatedSprite.rotation
 	if (!$AnimatedSprite.flip_h):
-		weapon.position.x -= 20
 		weapon.rotate(PI)
-	else:
-		weapon.position.x += 20
+
+	weapon.position += weapon.transform.x * 35
