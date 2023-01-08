@@ -14,6 +14,8 @@ var hasDoubleJump = false
 
 var shootTime = 1
 var currentShot = 0
+var startingPosition = position
+var invinsibilityTime = 1
 
 var bananaScene = preload("res://Assets/Scenes/Banana.tscn")
 
@@ -22,7 +24,7 @@ export var playerSuffix = "0"
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	$"Hazard Area".connect("area_entered", self, "on_hazard_area_entered")
-
+	startingPosition = position
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta):
@@ -57,11 +59,12 @@ func _physics_process(delta):
 
 	if (currentShot > 0):
 		currentShot -= delta
-		currentShot = max(currentShot,0)
+
+	if (invinsibilityTime > 0):
+		invinsibilityTime -= delta
 
 	if (Input.is_action_just_pressed("shoot" + playerSuffix)):
 		shoot()
-		
 
 	handle_animations()
 
@@ -88,7 +91,10 @@ func handle_animations():
 		$AnimatedSprite.flip_h = true if moveVector.x > 0 else false
 
 func on_hazard_area_entered(area2d):
-	emit_signal("died",playerSuffix,self)
+	if (invinsibilityTime > 0):
+		return
+	position = startingPosition
+	invinsibilityTime = 1
 
 func shoot():
 	if (currentShot > 0):
