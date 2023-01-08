@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://Assets/Scripts/Player.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Sprites/Players/Player 2/Sprite-0003.png" type="Texture" id=2]
@@ -10,11 +10,8 @@
 [ext_resource path="res://Assets/Sprites/Players/Player 2/attack.png" type="Texture" id=8]
 [ext_resource path="res://Assets/Sprites/Players/Player 2/emty.png" type="Texture" id=9]
 
-[sub_resource type="RectangleShape2D" id=4]
-extents = Vector2( 5.0285, 5.679 )
-
-[sub_resource type="CircleShape2D" id=3]
-radius = 8.90859
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 4.25, 5 )
 
 [sub_resource type="SpriteFrames" id=2]
 animations = [ {
@@ -39,8 +36,8 @@ animations = [ {
 "speed": 11.0
 } ]
 
-[sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 8.37521, 5.9805 )
+[sub_resource type="CircleShape2D" id=4]
+radius = 7.51665
 
 [node name="Player" type="KinematicBody2D" groups=["player"]]
 scale = Vector2( 2, 2 )
@@ -54,30 +51,22 @@ wait_time = 0.1
 one_shot = true
 
 [node name="Hazard Area" type="Area2D" parent="."]
-position = Vector2( 0, -4 )
+position = Vector2( -0.226, 0 )
 collision_layer = 16384
 collision_mask = 16384
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hazard Area"]
-position = Vector2( -1.17, -1.784 )
-shape = SubResource( 4 )
-
-[node name="Pickup Area" type="Area2D" parent="."]
-collision_layer = 32768
-collision_mask = 32768
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Pickup Area"]
-position = Vector2( -0.534, -5.747 )
+position = Vector2( -0.0240002, -2 )
 shape = SubResource( 3 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
-position = Vector2( -3.274, -8 )
+position = Vector2( -3.5, -4 )
 scale = Vector2( -1, 1 )
 frames = SubResource( 2 )
 animation = "Idle"
+frame = 1
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( -1.171, -6.019 )
-scale = Vector2( 0.597, 1 )
-shape = SubResource( 1 )
+position = Vector2( 0.5, -3.5 )
+shape = SubResource( 4 )

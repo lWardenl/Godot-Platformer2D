@@ -18,6 +18,7 @@ var invinsibilityTime = 1
 var winUI = preload("res://Assets/Scenes/WinUI.tscn")
 var menuScene = preload("res://Assets/Scenes/WinUI.tscn")
 var weaponScene
+var initRot
 
 export var playerSuffix = "0"
 export var playerIndex = 0
@@ -28,6 +29,7 @@ export var playerLives = 3
 func _ready():
 	$"Hazard Area".connect("area_entered", self, "on_hazard_area_entered")
 	startingPosition = position
+	initRot = rotation
 	weaponScene = load(weaponPath)
 	menuScene = load("res://Assets/Scenes/MainMenu.tscn")
 
@@ -85,12 +87,15 @@ func handle_animations():
 	
 	if(!is_on_floor()):
 		$AnimatedSprite.play("Jump")
+		$AnimatedSprite.rotate(PI/10)
 	elif(currentShot > 0):
 		$AnimatedSprite.play("Attack")
 	elif(moveVector.x != 0):
 		$AnimatedSprite.play("Run")
+		$AnimatedSprite.rotation = lerp_angle(rotation,initRot,0.01)
 	else:
 		$AnimatedSprite.play("Idle")
+		$AnimatedSprite.rotation = lerp_angle(rotation,initRot,0.01)
 	
 	if(moveVector.x != 0):
 		$AnimatedSprite.flip_h = true if moveVector.x > 0 else false
@@ -111,9 +116,6 @@ func on_hazard_area_entered(_area2d):
 		winScreen.queue_free()
 		get_node("/root/BaseLevel").queue_free()
 		get_node("/root").add_child(menuScene.instance())
-		
-		
-# func GoToMainMenu():
 
 func shoot():
 	if (currentShot > 0):
