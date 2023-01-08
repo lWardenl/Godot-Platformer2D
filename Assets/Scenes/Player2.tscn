@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://Assets/Scripts/Player.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Sprites/Players/Player 2/Sprite-0003.png" type="Texture" id=2]
@@ -52,6 +52,9 @@ animations = [ {
 [sub_resource type="RectangleShape2D" id=4]
 extents = Vector2( 5.0285, 5.679 )
 
+[sub_resource type="RectangleShape2D" id=5]
+extents = Vector2( 5, 5.5 )
+
 [node name="Player" type="KinematicBody2D" groups=["player"]]
 scale = Vector2( 2, 2 )
 script = ExtResource( 1 )
@@ -77,8 +80,18 @@ position = Vector2( -3, -2.5 )
 scale = Vector2( -1, 1 )
 frames = SubResource( 2 )
 animation = "Revive"
+frame = 1
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 0.5, -3.5 )
 shape = SubResource( 4 )
+
+[node name="Pickup Area" type="Area2D" parent="."]
+position = Vector2( -3.5, 5 )
+collision_layer = 32768
+collision_mask = 32768
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Pickup Area"]
+position = Vector2( 3.5, -9.25 )
+shape = SubResource( 5 )

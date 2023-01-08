@@ -20,6 +20,7 @@ var menuScene = preload("res://Assets/Scenes/WinUI.tscn")
 var weaponScene
 var initRot
 var isDead = false
+var hasCheese = false
 
 export var playerSuffix = "0"
 export var playerIndex = 0
@@ -29,6 +30,7 @@ export var playerLives = 3
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	$"Hazard Area".connect("area_entered", self, "on_hazard_area_entered")
+	$"Pickup Area".connect("area_entered", self, "on_pickup")
 	startingPosition = position
 	initRot = rotation
 	weaponScene = load(weaponPath)
@@ -90,7 +92,10 @@ func handle_animations():
 	var moveVector = get_movement_vector()
 
 	if (isDead):
-		$AnimatedSprite.play("Death")
+		if (hasCheese):
+			$AnimatedSprite.play("Revive")
+		else:
+			$AnimatedSprite.play("Death")
 	elif(!is_on_floor()):
 		$AnimatedSprite.play("Jump")
 		$AnimatedSprite.rotate(PI/15)
@@ -119,22 +124,27 @@ func handle_animations():
 func on_hazard_area_entered(_area2d):
 	if (invinsibilityTime > 0):
 		return
-	playerLives -= 1
-	if (playerLives < 1):
-		var winScreen = winUI.instance()
-		get_tree().root.add_child(winScreen)
-		winScreen.get_node("Text").bbcode_text = "[center]Player " + str(- playerIndex + 2) + " Wins![/center]"
-		get_tree().paused = true
-		yield(get_tree().create_timer(1.0), "timeout")
-		get_tree().paused = false
-		winScreen.queue_free()
-		get_node("/root/BaseLevel").queue_free()
-		get_node("/root").add_child(menuScene.instance())
+	if (!hasCheese):
+		playerLives -= 1
+		if (playerLives < 1):
+			var winScreen = winUI.instance()
+			get_tree().root.add_child(winScreen)
+			winScreen.get_node("Text").bbcode_text = "[center]Player " + str(- playerIndex + 2) + " Wins![/center]"
+			get_tree().paused = true
+			yield(get_tree().create_timer(1.0), "timeout")
+			get_tree().paused = false
+			winScreen.queue_free()
+			get_node("/root/BaseLevel").queue_free()
+			get_node("/root").add_child(menuScene.instance())
+			return
 	isDead = true
 	yield(get_tree().create_timer(1.0), "timeout")
 	isDead = false
-	position = startingPosition
+	if (!hasCheese):
+		position = startingPosition
 	invinsibilityTime = 1
+	if (hasCheese):
+		hasCheese = false
 
 func shoot():
 	if (currentShot > 0):
@@ -150,3 +160,6 @@ func shoot():
 		weapon.rotate(PI)
 
 	weapon.position += weapon.transform.x * 35
+
+func on_pickup(_area2d):
+	hasCheese = true
