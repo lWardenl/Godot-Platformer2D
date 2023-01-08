@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/laugh.mp3-9943e88a80b3a44d2dec587e38184908.mp3str"
+
+[deps]
+
+source_file="res://Assets/Audio/laugh.mp3"
+dest_files=[ "res://.import/laugh.mp3-9943e88a80b3a44d2dec587e38184908.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

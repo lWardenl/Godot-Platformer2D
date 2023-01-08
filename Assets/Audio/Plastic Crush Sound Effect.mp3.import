@@ -11,5 +11,5 @@ dest_files=[ "res://.import/Plastic Crush Sound Effect.mp3-1e4b82fdcc689beb5484b
 
 [params]
 
-loop=true
+loop=false
 loop_offset=0

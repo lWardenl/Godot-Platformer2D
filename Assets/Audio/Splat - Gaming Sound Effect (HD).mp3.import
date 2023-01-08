@@ -11,5 +11,5 @@ dest_files=[ "res://.import/Splat - Gaming Sound Effect (HD).mp3-449e866e619a016
 
 [params]
 
-loop=true
+loop=false
 loop_offset=0

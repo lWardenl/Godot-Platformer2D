@@ -17,6 +17,7 @@ var invinsibilityTime = 1
 
 var winUI = preload("res://Assets/Scenes/WinUI.tscn")
 var menuScene = preload("res://Assets/Scenes/WinUI.tscn")
+var laughTrack = preload("res://Assets/Scenes/LaughTrack.tscn")
 var weaponScene
 var initRot
 var isDead = false
@@ -163,3 +164,4 @@ func shoot():
 
 func on_pickup(_area2d):
 	hasCheese = true
+	get_tree().root.add_child(laughTrack.instance())

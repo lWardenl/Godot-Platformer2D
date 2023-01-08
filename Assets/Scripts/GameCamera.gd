@@ -2,7 +2,6 @@ extends Camera2D
 
 var targetPositon = Vector2.ZERO
 
-
 export(Color, RGB) var backgroundColor
 
 func _ready():
