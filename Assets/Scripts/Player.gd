@@ -17,14 +17,16 @@ var currentShot = 0
 var startingPosition = position
 var invinsibilityTime = 1
 
-var bananaScene = preload("res://Assets/Scenes/Banana.tscn")
+var weaponScene
 
 export var playerSuffix = "0"
+export var weaponPath = "res://Assets/Scenes/Banana.tscn"
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	$"Hazard Area".connect("area_entered", self, "on_hazard_area_entered")
 	startingPosition = position
+	weaponScene = load(weaponPath)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta):
@@ -90,7 +92,7 @@ func handle_animations():
 	if(moveVector.x != 0):
 		$AnimatedSprite.flip_h = true if moveVector.x > 0 else false
 
-func on_hazard_area_entered(area2d):
+func on_hazard_area_entered(_area2d):
 	if (invinsibilityTime > 0):
 		return
 	position = startingPosition
@@ -102,11 +104,11 @@ func shoot():
 	
 	currentShot = shootTime
 
-	var banana = bananaScene.instance()
-	get_node("/root/BaseLevel").add_child(banana)
-	banana.global_position = position - Vector2(0,10)
+	var weapon = weaponScene.instance()
+	get_node("/root/BaseLevel").add_child(weapon)
+	weapon.global_position = position - Vector2(0,10)
 	if (!$AnimatedSprite.flip_h):
-		banana.position.x -= 18
-		banana.rotate(PI)
+		weapon.position.x -= 20
+		weapon.rotate(PI)
 	else:
-		banana.position.x += 18
+		weapon.position.x += 20
