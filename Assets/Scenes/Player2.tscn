@@ -10,13 +10,13 @@
 [ext_resource path="res://Assets/Sprites/Players/Player 2/attack.png" type="Texture" id=8]
 [ext_resource path="res://Assets/Sprites/Players/Player 2/emty.png" type="Texture" id=9]
 
-[sub_resource type="CircleShape2D" id=3]
-radius = 8.90859
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 4.25, 5 )
 
 [sub_resource type="SpriteFrames" id=2]
 animations = [ {
 "frames": [ ExtResource( 8 ), ExtResource( 9 ) ],
-"loop": false,
+"loop": true,
 "name": "Attack",
 "speed": 5.0
 }, {
@@ -36,8 +36,8 @@ animations = [ {
 "speed": 11.0
 } ]
 
-[sub_resource type="RectangleShape2D" id=4]
-extents = Vector2( 5.0285, 5.679 )
+[sub_resource type="CircleShape2D" id=4]
+radius = 7.51665
 
 [node name="Player" type="KinematicBody2D" groups=["player"]]
 scale = Vector2( 2, 2 )

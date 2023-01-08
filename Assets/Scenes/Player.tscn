@@ -37,7 +37,7 @@ animations = [ {
 radius = 7.51665
 
 [sub_resource type="RectangleShape2D" id=4]
-extents = Vector2( 5, 5.5 )
+extents = Vector2( 5, 4.75 )
 
 [node name="Player2" type="KinematicBody2D" groups=["player"]]
 scale = Vector2( 2, 2 )

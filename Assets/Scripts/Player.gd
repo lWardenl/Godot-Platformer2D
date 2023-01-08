@@ -10,7 +10,7 @@ var fallMultiplier = 4
 
 var hasDoubleJump = false
 
-var shootTime = 1
+var shootTime = 0.5
 var currentShot = 0
 var startingPosition = position
 var invinsibilityTime = 1
@@ -87,15 +87,25 @@ func handle_animations():
 	
 	if(!is_on_floor()):
 		$AnimatedSprite.play("Jump")
-		$AnimatedSprite.rotate(PI/10)
+		$AnimatedSprite.rotate(PI/15)
 	elif(currentShot > 0):
 		$AnimatedSprite.play("Attack")
+		if ($AnimatedSprite.rotation != initRot):
+			$AnimatedSprite.rotate(PI/12)
+			if (wrapf($AnimatedSprite.rotation - initRot, 0, TAU) < 0.3):
+					$AnimatedSprite.rotation = initRot
 	elif(moveVector.x != 0):
 		$AnimatedSprite.play("Run")
-		$AnimatedSprite.rotation = lerp_angle(rotation,initRot,0.01)
+		if ($AnimatedSprite.rotation != initRot):
+			$AnimatedSprite.rotate(PI/12)
+			if (wrapf($AnimatedSprite.rotation - initRot, 0, TAU) < 0.3):
+					$AnimatedSprite.rotation = initRot
 	else:
 		$AnimatedSprite.play("Idle")
-		$AnimatedSprite.rotation = lerp_angle(rotation,initRot,0.01)
+		if ($AnimatedSprite.rotation != initRot):
+			$AnimatedSprite.rotate(PI/12)
+			if (wrapf($AnimatedSprite.rotation - initRot, 0, TAU) < 0.3):
+					$AnimatedSprite.rotation = initRot
 	
 	if(moveVector.x != 0):
 		$AnimatedSprite.flip_h = true if moveVector.x > 0 else false
