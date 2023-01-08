@@ -1,0 +1,49 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://Assets/Scenes/Spikes.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Assets/Scenes/GameCamera.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Assets/Scenes/Player.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Assets/TileMap/TilemapNode.tres" type="TileSet" id=5]
+
+[sub_resource type="GDScript" id=1]
+script/source = "extends Node
+
+var playerScene = preload(\"res://Assets/Scenes/Player.tscn\")
+
+func _ready():
+	register_player($Player)
+	register_player($Player2)
+	
+func register_player(player):
+	player.connect(\"died\", self, \"on_player_died\")
+	
+func create_player(suffix,position):
+	var playerInstance = playerScene.instance()
+	get_node(\"/root/BaseLevel\").add_child(playerInstance)
+	register_player(playerInstance)
+	playerInstance.position = position
+	playerInstance.playerSuffix = suffix
+	
+func on_player_died(suffix,player):
+	player.queue_free()
+	create_player(suffix,player.position)
+"
+
+[node name="BaseLevel" type="Node"]
+script = SubResource( 1 )
+
+[node name="TileMap" type="TileMap" parent="."]
+position = Vector2( -128, 0 )
+tile_set = ExtResource( 5 )
+cell_size = Vector2( 18, 18 )
+format = 1
+tile_data = PoolIntArray( -131072, 1, 0, -131071, 1, 1, -131070, 1, 2, -1, 1, 0, -65536, 1, 65540, -65535, 1, 65537, -65534, 1, 65538, 65534, 1, 0, 65535, 1, 65540, 0, 1, 65537, 1, 1, 65537, 2, 1, 65539, 3, 1, 1, 4, 1, 1, 5, 1, 2, 6, 0, 0, 131070, 1, 65536, 131071, 1, 65537, 65536, 1, 65537, 65537, 1, 65537, 65538, 1, 65537, 65539, 1, 65537, 65540, 1, 65537, 65541, 1, 65538, 196606, 1, 65536, 196607, 1, 65537, 131072, 1, 65537, 131073, 1, 65537, 131074, 1, 65537, 131075, 1, 65537, 131076, 1, 65537, 131077, 1, 65538, 131083, 1, 0, 131084, 1, 1, 131085, 1, 1, 131086, 1, 1, 131087, 1, 2, 262142, 1, 65536, 262143, 1, 65537, 196608, 1, 65537, 196609, 1, 65537, 196610, 1, 65537, 196611, 1, 65537, 196612, 1, 65537, 196613, 1, 65538, 196619, 1, 65536, 196620, 1, 65537, 196621, 1, 65537, 196622, 1, 65537, 196623, 1, 65538, 327678, 1, 131072, 327679, 1, 131073, 262144, 1, 131073, 262145, 1, 131073, 262146, 1, 131073, 262147, 1, 131073, 262148, 1, 131073, 262149, 1, 131074, 262155, 1, 131072, 262156, 1, 131073, 262157, 1, 131073, 262158, 1, 131073, 262159, 1, 131074 )
+
+[node name="Player" parent="." instance=ExtResource( 4 )]
+position = Vector2( -117, -36 )
+
+[node name="GameCamera" parent="." instance=ExtResource( 3 )]
+editor_draw_limits = true
+
+[node name="Spikes" parent="." instance=ExtResource( 1 )]
+position = Vector2( -46, 2 )

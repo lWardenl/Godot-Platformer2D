@@ -33,9 +33,13 @@ func _ready():
 	initRot = rotation
 	weaponScene = load(weaponPath)
 	menuScene = load("res://Assets/Scenes/MainMenu.tscn")
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
+	
+	# Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta):
+	handle_animations()
+
+	if (isDead):
+		return
 	var moveVector = get_movement_vector()
 	
 	velocity.x += moveVector.x * horizontalAcceleration * delta
@@ -74,7 +78,6 @@ func _physics_process(delta):
 	if (Input.is_action_just_pressed("shoot" + playerSuffix)):
 		shoot()
 
-	handle_animations()
 
 
 func get_movement_vector():
@@ -116,11 +119,6 @@ func handle_animations():
 func on_hazard_area_entered(_area2d):
 	if (invinsibilityTime > 0):
 		return
-	isDead = true
-	yield(get_tree().create_timer(1.0), "timeout")
-	isDead = false
-	position = startingPosition
-	invinsibilityTime = 1
 	playerLives -= 1
 	if (playerLives < 1):
 		var winScreen = winUI.instance()
@@ -132,6 +130,11 @@ func on_hazard_area_entered(_area2d):
 		winScreen.queue_free()
 		get_node("/root/BaseLevel").queue_free()
 		get_node("/root").add_child(menuScene.instance())
+	isDead = true
+	yield(get_tree().create_timer(1.0), "timeout")
+	isDead = false
+	position = startingPosition
+	invinsibilityTime = 1
 
 func shoot():
 	if (currentShot > 0):
