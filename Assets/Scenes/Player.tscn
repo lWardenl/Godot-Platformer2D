@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://Assets/Scripts/Player.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Sprites/Players/Player 1/Sprite-0005.png" type="Texture" id=2]
@@ -9,12 +9,18 @@
 [ext_resource path="res://Assets/Sprites/Players/Player 1/Sprite-0003.png" type="Texture" id=7]
 [ext_resource path="res://Assets/Sprites/Players/Player 1/Sprite-0004.png" type="Texture" id=8]
 [ext_resource path="res://Assets/Sprites/Players/Player 1/attack1.png" type="Texture" id=9]
+[ext_resource path="res://Assets/Sprites/Players/Player 1/dead1.png" type="Texture" id=10]
 
 [sub_resource type="SpriteFrames" id=2]
 animations = [ {
 "frames": [ ExtResource( 9 ), ExtResource( 3 ) ],
 "loop": false,
 "name": "Attack",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 10 ) ],
+"loop": true,
+"name": "Death",
 "speed": 5.0
 }, {
 "frames": [ ExtResource( 4 ), ExtResource( 7 ) ],
@@ -37,7 +43,7 @@ animations = [ {
 radius = 7.51665
 
 [sub_resource type="RectangleShape2D" id=4]
-extents = Vector2( 5, 4.75 )
+extents = Vector2( 5, 5.5 )
 
 [node name="Player2" type="KinematicBody2D" groups=["player"]]
 scale = Vector2( 2, 2 )
@@ -49,10 +55,10 @@ wait_time = 0.1
 one_shot = true
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
-position = Vector2( -4.5, 1 )
+position = Vector2( -3, 1.5 )
 scale = Vector2( -1, 1 )
 frames = SubResource( 2 )
-animation = "Attack"
+animation = "Idle"
 frame = 1
 playing = true
 offset = Vector2( 0, -4 )
