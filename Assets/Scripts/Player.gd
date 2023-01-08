@@ -19,6 +19,7 @@ var winUI = preload("res://Assets/Scenes/WinUI.tscn")
 var menuScene = preload("res://Assets/Scenes/WinUI.tscn")
 var weaponScene
 var initRot
+var isDead = false
 
 export var playerSuffix = "0"
 export var playerIndex = 0
@@ -84,8 +85,10 @@ func get_movement_vector():
 	
 func handle_animations():
 	var moveVector = get_movement_vector()
-	
-	if(!is_on_floor()):
+
+	if (isDead):
+		$AnimatedSprite.play("Death")
+	elif(!is_on_floor()):
 		$AnimatedSprite.play("Jump")
 		$AnimatedSprite.rotate(PI/15)
 	elif(currentShot > 0):
@@ -113,6 +116,9 @@ func handle_animations():
 func on_hazard_area_entered(_area2d):
 	if (invinsibilityTime > 0):
 		return
+	isDead = true
+	yield(get_tree().create_timer(1.0), "timeout")
+	isDead = false
 	position = startingPosition
 	invinsibilityTime = 1
 	playerLives -= 1
