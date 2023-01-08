@@ -1,34 +1,46 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://Assets/Scripts/Player.gd" type="Script" id=1]
-[ext_resource path="res://Assets/Player/character_0000.png" type="Texture" id=2]
-[ext_resource path="res://Assets/Player/character_0001.png" type="Texture" id=3]
+[ext_resource path="res://Assets/Sprites/Players/Player 2/Sprite-0003.png" type="Texture" id=2]
+[ext_resource path="res://Assets/Sprites/Players/Player 2/Sprite-0004.png" type="Texture" id=3]
+[ext_resource path="res://Assets/Sprites/Players/Player 2/Sprite-0001.png" type="Texture" id=4]
+[ext_resource path="res://Assets/Sprites/Players/Player 2/Sprite-0002.png" type="Texture" id=5]
+[ext_resource path="res://Assets/Sprites/Players/Player 2/Sprite-0005.png" type="Texture" id=6]
+[ext_resource path="res://Assets/Sprites/Players/Player 2/Sprite-0006.png" type="Texture" id=7]
+[ext_resource path="res://Assets/Sprites/Players/Player 2/attack.png" type="Texture" id=8]
+[ext_resource path="res://Assets/Sprites/Players/Player 2/emty.png" type="Texture" id=9]
 
 [sub_resource type="RectangleShape2D" id=4]
-extents = Vector2( 5, 9.5 )
+extents = Vector2( 5.0285, 5.679 )
 
 [sub_resource type="CircleShape2D" id=3]
-radius = 14.0
+radius = 8.90859
 
 [sub_resource type="SpriteFrames" id=2]
 animations = [ {
-"frames": [ ExtResource( 2 ) ],
+"frames": [ ExtResource( 8 ), ExtResource( 9 ) ],
+"loop": true,
+"name": "Attack",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 4 ) ],
 "loop": true,
 "name": "Idle",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 3 ) ],
+"frames": [ ExtResource( 4 ), ExtResource( 3 ) ],
 "loop": true,
 "name": "Jump",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 2 ), ExtResource( 3 ) ],
+"frames": [ ExtResource( 4 ), ExtResource( 5 ), ExtResource( 2 ), ExtResource( 3 ), ExtResource( 6 ), ExtResource( 7 ) ],
 "loop": true,
 "name": "Run",
-"speed": 10.0
+"speed": 11.0
 } ]
 
 [sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 8.37521, 5.9805 )
 
 [node name="Player" type="KinematicBody2D" groups=["player"]]
 script = ExtResource( 1 )
@@ -44,7 +56,7 @@ collision_layer = 16384
 collision_mask = 16384
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hazard Area"]
-position = Vector2( 0, -5.5 )
+position = Vector2( -1.9715, -1.784 )
 shape = SubResource( 4 )
 
 [node name="Pickup Area" type="Area2D" parent="."]
@@ -52,17 +64,17 @@ collision_layer = 32768
 collision_mask = 32768
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Pickup Area"]
-position = Vector2( 0, -12 )
+position = Vector2( -2.905, -5.747 )
 shape = SubResource( 3 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
-modulate = Color( 0.937255, 0.180392, 0.180392, 1 )
+position = Vector2( 0, -8 )
 frames = SubResource( 2 )
-animation = "Idle"
+animation = "Attack"
+frame = 1
 playing = true
-offset = Vector2( 0, -12 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( 0, -10.039 )
+position = Vector2( -2, -6.0195 )
 scale = Vector2( 0.597, 1 )
 shape = SubResource( 1 )
