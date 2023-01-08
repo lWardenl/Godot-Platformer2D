@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://Assets/Scripts/Player.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Sprites/Players/Player 1/Sprite-0005.png" type="Texture" id=2]
@@ -10,6 +10,8 @@
 [ext_resource path="res://Assets/Sprites/Players/Player 1/Sprite-0004.png" type="Texture" id=8]
 [ext_resource path="res://Assets/Sprites/Players/Player 1/attack1.png" type="Texture" id=9]
 [ext_resource path="res://Assets/Sprites/Players/Player 1/dead1.png" type="Texture" id=10]
+[ext_resource path="res://Assets/Sprites/Players/Player 1/reviv12.png" type="Texture" id=11]
+[ext_resource path="res://Assets/Sprites/Players/Player 1/reviv2441.png" type="Texture" id=12]
 
 [sub_resource type="SpriteFrames" id=2]
 animations = [ {
@@ -31,6 +33,11 @@ animations = [ {
 "frames": [ ExtResource( 4 ), ExtResource( 6 ) ],
 "loop": true,
 "name": "Jump",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 11 ), ExtResource( 12 ) ],
+"loop": true,
+"name": "Revive",
 "speed": 5.0
 }, {
 "frames": [ ExtResource( 6 ), ExtResource( 7 ), ExtResource( 8 ), ExtResource( 2 ), ExtResource( 5 ), ExtResource( 4 ) ],
@@ -58,7 +65,8 @@ one_shot = true
 position = Vector2( -3, 1.5 )
 scale = Vector2( -1, 1 )
 frames = SubResource( 2 )
-animation = "Idle"
+animation = "Revive"
+frame = 1
 playing = true
 offset = Vector2( 0, -4 )
 
