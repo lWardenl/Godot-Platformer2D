@@ -19,7 +19,7 @@ radius = 8.90859
 [sub_resource type="SpriteFrames" id=2]
 animations = [ {
 "frames": [ ExtResource( 8 ), ExtResource( 9 ) ],
-"loop": true,
+"loop": false,
 "name": "Attack",
 "speed": 5.0
 }, {
@@ -74,6 +74,7 @@ position = Vector2( -3.274, -8 )
 scale = Vector2( -1, 1 )
 frames = SubResource( 2 )
 animation = "Idle"
+frame = 1
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
