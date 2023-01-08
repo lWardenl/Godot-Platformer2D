@@ -65,13 +65,12 @@ one_shot = true
 position = Vector2( -3, 1.5 )
 scale = Vector2( -1, 1 )
 frames = SubResource( 2 )
-animation = "Revive"
-frame = 1
+animation = "Idle"
 playing = true
 offset = Vector2( 0, -4 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( 0, -2.5 )
+position = Vector2( 0, -4 )
 shape = SubResource( 5 )
 
 [node name="Hazard Area" type="Area2D" parent="."]
@@ -80,5 +79,5 @@ collision_layer = 16384
 collision_mask = 16384
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hazard Area"]
-position = Vector2( 3, -7.25 )
+position = Vector2( 3.5, -9.25 )
 shape = SubResource( 4 )
