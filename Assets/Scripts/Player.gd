@@ -61,6 +61,7 @@ func _physics_process(delta):
 
 	if (Input.is_action_just_pressed("shoot" + playerSuffix)):
 		shoot()
+		
 
 	handle_animations()
 
@@ -76,6 +77,8 @@ func handle_animations():
 	
 	if(!is_on_floor()):
 		$AnimatedSprite.play("Jump")
+	elif(currentShot > 0):
+		$AnimatedSprite.play("Attack")
 	elif(moveVector.x != 0):
 		$AnimatedSprite.play("Run")
 	else:

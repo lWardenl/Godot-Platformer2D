@@ -19,6 +19,7 @@ tile_data = PoolIntArray( -917514, 1, 0, -917513, 1, 1, -917512, 1, 1, -917511, 
 
 [node name="Player" parent="." instance=ExtResource( 4 )]
 position = Vector2( -216, 45 )
+scale = Vector2( 2, 2 )
 playerSuffix = ""
 
 [node name="GameCamera" parent="." instance=ExtResource( 3 )]

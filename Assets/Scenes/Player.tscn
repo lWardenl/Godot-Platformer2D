@@ -1,36 +1,49 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://Assets/Scripts/Player.gd" type="Script" id=1]
-[ext_resource path="res://Assets/Player/character_0000.png" type="Texture" id=2]
-[ext_resource path="res://Assets/Player/character_0001.png" type="Texture" id=3]
+[ext_resource path="res://Assets/Sprites/Players/Player 1/Sprite-0005.png" type="Texture" id=2]
+[ext_resource path="res://Assets/Sprites/Players/Player 1/emty1.png" type="Texture" id=3]
+[ext_resource path="res://Assets/Sprites/Players/Player 1/Sprite-0001.png" type="Texture" id=4]
+[ext_resource path="res://Assets/Sprites/Players/Player 1/Sprite-0006.png" type="Texture" id=5]
+[ext_resource path="res://Assets/Sprites/Players/Player 1/Sprite-0002.png" type="Texture" id=6]
+[ext_resource path="res://Assets/Sprites/Players/Player 1/Sprite-0003.png" type="Texture" id=7]
+[ext_resource path="res://Assets/Sprites/Players/Player 1/Sprite-0004.png" type="Texture" id=8]
+[ext_resource path="res://Assets/Sprites/Players/Player 1/attack1.png" type="Texture" id=9]
 
 [sub_resource type="RectangleShape2D" id=4]
-extents = Vector2( 5, 11 )
+extents = Vector2( 5, 5.5 )
 
 [sub_resource type="CircleShape2D" id=3]
-radius = 14.0
+radius = 10.0499
 
 [sub_resource type="SpriteFrames" id=2]
 animations = [ {
-"frames": [ ExtResource( 2 ) ],
-"loop": true,
-"name": "Idle",
+"frames": [ ExtResource( 9 ), ExtResource( 3 ) ],
+"loop": false,
+"name": "Attack",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 3 ) ],
+"frames": [ ExtResource( 4 ), ExtResource( 7 ) ],
+"loop": true,
+"name": "Idle",
+"speed": 3.0
+}, {
+"frames": [ ExtResource( 4 ), ExtResource( 6 ) ],
 "loop": true,
 "name": "Jump",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 2 ), ExtResource( 3 ) ],
+"frames": [ ExtResource( 6 ), ExtResource( 7 ), ExtResource( 8 ), ExtResource( 2 ), ExtResource( 5 ), ExtResource( 4 ) ],
 "loop": true,
 "name": "Run",
-"speed": 10.0
+"speed": 11.0
 } ]
 
 [sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 9.1876, 6 )
 
 [node name="Player" type="KinematicBody2D" groups=["player"]]
+scale = Vector2( 2, 2 )
 script = ExtResource( 1 )
 playerSuffix = "_2"
 
@@ -39,15 +52,15 @@ wait_time = 0.1
 one_shot = true
 
 [node name="Hazard Area" type="Area2D" parent="."]
-position = Vector2( 0, -4 )
 collision_layer = 16384
 collision_mask = 16384
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hazard Area"]
-position = Vector2( 0, -7 )
+position = Vector2( 0, -5.5 )
 shape = SubResource( 4 )
 
 [node name="Pickup Area" type="Area2D" parent="."]
+position = Vector2( 0, 4 )
 collision_layer = 32768
 collision_mask = 32768
 
@@ -56,12 +69,15 @@ position = Vector2( 0, -12 )
 shape = SubResource( 3 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+position = Vector2( 0, 4 )
+scale = Vector2( -1, 1 )
 frames = SubResource( 2 )
-animation = "Idle"
+animation = "Attack"
+frame = 1
 playing = true
 offset = Vector2( 0, -12 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( 0, -10.039 )
+position = Vector2( -0.485, -6 )
 scale = Vector2( 0.597, 1 )
 shape = SubResource( 1 )
