@@ -21,6 +21,11 @@ animations = [ {
 "name": "Attack",
 "speed": 5.0
 }, {
+"frames": [ ExtResource( 10 ) ],
+"loop": true,
+"name": "Death",
+"speed": 5.0
+}, {
 "frames": [ ExtResource( 4 ), ExtResource( 2 ) ],
 "loop": true,
 "name": "Idle",
@@ -35,11 +40,6 @@ animations = [ {
 "loop": true,
 "name": "Run",
 "speed": 11.0
-}, {
-"frames": [ ExtResource( 10 ) ],
-"loop": true,
-"name": "death",
-"speed": 5.0
 } ]
 
 [sub_resource type="RectangleShape2D" id=4]
@@ -69,7 +69,7 @@ shape = SubResource( 3 )
 position = Vector2( -3, -2.5 )
 scale = Vector2( -1, 1 )
 frames = SubResource( 2 )
-animation = "death"
+animation = "Death"
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
