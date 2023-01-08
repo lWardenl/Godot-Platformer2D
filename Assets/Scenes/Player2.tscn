@@ -19,7 +19,7 @@ radius = 8.90859
 [sub_resource type="SpriteFrames" id=2]
 animations = [ {
 "frames": [ ExtResource( 8 ), ExtResource( 9 ) ],
-"loop": false,
+"loop": true,
 "name": "Attack",
 "speed": 5.0
 }, {

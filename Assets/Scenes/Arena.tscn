@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Assets/Scenes/Player2.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Assets/Scenes/Spikes.tscn" type="PackedScene" id=2]
@@ -6,32 +6,7 @@
 [ext_resource path="res://Assets/Scenes/Player.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Assets/TileMap/TilemapNode.tres" type="TileSet" id=5]
 
-[sub_resource type="GDScript" id=1]
-script/source = "extends Node
-
-var playerScene = preload(\"res://Assets/Scenes/Player.tscn\")
-
-func _ready():
-	register_player($Player)
-	register_player($Player2)
-	
-func register_player(player):
-	player.connect(\"died\", self, \"on_player_died\")
-	
-func create_player(suffix,position):
-	var playerInstance = playerScene.instance()
-	get_node(\"/root/BaseLevel\").add_child(playerInstance)
-	register_player(playerInstance)
-	playerInstance.position = position
-	playerInstance.playerSuffix = suffix
-	
-func on_player_died(suffix,player):
-	player.queue_free()
-	create_player(suffix,player.position)
-"
-
 [node name="BaseLevel" type="Node"]
-script = SubResource( 1 )
 
 [node name="TileMap" type="TileMap" parent="."]
 position = Vector2( -128, 0 )
