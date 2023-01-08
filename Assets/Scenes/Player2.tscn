@@ -23,13 +23,13 @@ animations = [ {
 "name": "Attack",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 4 ) ],
+"frames": [ ExtResource( 4 ), ExtResource( 2 ) ],
 "loop": true,
 "name": "Idle",
-"speed": 5.0
+"speed": 3.0
 }, {
 "frames": [ ExtResource( 4 ), ExtResource( 3 ) ],
-"loop": true,
+"loop": false,
 "name": "Jump",
 "speed": 5.0
 }, {
@@ -43,6 +43,7 @@ animations = [ {
 extents = Vector2( 8.37521, 5.9805 )
 
 [node name="Player" type="KinematicBody2D" groups=["player"]]
+scale = Vector2( 2, 2 )
 script = ExtResource( 1 )
 playerSuffix = "_2"
 
@@ -56,7 +57,7 @@ collision_layer = 16384
 collision_mask = 16384
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hazard Area"]
-position = Vector2( -1.9715, -1.784 )
+position = Vector2( -1.17, -1.784 )
 shape = SubResource( 4 )
 
 [node name="Pickup Area" type="Area2D" parent="."]
@@ -64,17 +65,17 @@ collision_layer = 32768
 collision_mask = 32768
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Pickup Area"]
-position = Vector2( -2.905, -5.747 )
+position = Vector2( -0.534, -5.747 )
 shape = SubResource( 3 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
-position = Vector2( 0, -8 )
+position = Vector2( -3.274, -8 )
+scale = Vector2( -1, 1 )
 frames = SubResource( 2 )
-animation = "Attack"
-frame = 1
+animation = "Idle"
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( -2, -6.0195 )
+position = Vector2( -1.171, -6.019 )
 scale = Vector2( 0.597, 1 )
 shape = SubResource( 1 )
