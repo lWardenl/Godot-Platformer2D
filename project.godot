@@ -10,7 +10,7 @@ config_version=4
 
 [application]
 
-config/name="2D Platformer Course"
+config/name="Banana's and Roses"
 run/main_scene="res://Assets/Scenes/MainMenu.tscn"
 config/icon="res://icon.png"
 

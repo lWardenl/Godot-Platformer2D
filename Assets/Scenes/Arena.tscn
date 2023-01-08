@@ -71,7 +71,7 @@ zoom = Vector2( 2.52, 2.081 )
 editor_draw_limits = true
 
 [node name="Spikes" parent="." instance=ExtResource( 2 )]
-position = Vector2( -32, 73 )
+position = Vector2( 63, 36 )
 
 [node name="Player2" parent="." instance=ExtResource( 1 )]
 position = Vector2( 320, 56 )
