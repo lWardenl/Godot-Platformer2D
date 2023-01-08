@@ -1,7 +1,5 @@
 extends KinematicBody2D
 
-signal died
-
 var gravity = 1000
 var velocity = Vector2.ZERO
 var horizontalAcceleration = 2000
@@ -17,16 +15,21 @@ var currentShot = 0
 var startingPosition = position
 var invinsibilityTime = 1
 
+var winUI = preload("res://Assets/Scenes/WinUI.tscn")
+var menuScene = preload("res://Assets/Scenes/WinUI.tscn")
 var weaponScene
 
 export var playerSuffix = "0"
+export var playerIndex = 0
 export var weaponPath = "res://Assets/Scenes/Banana.tscn"
+export var playerLives = 3
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	$"Hazard Area".connect("area_entered", self, "on_hazard_area_entered")
 	startingPosition = position
 	weaponScene = load(weaponPath)
+	menuScene = load("res://Assets/Scenes/MainMenu.tscn")
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta):
@@ -97,6 +100,20 @@ func on_hazard_area_entered(_area2d):
 		return
 	position = startingPosition
 	invinsibilityTime = 1
+	playerLives -= 1
+	if (playerLives < 1):
+		var winScreen = winUI.instance()
+		get_tree().root.add_child(winScreen)
+		winScreen.get_node("Text").bbcode_text = "Player " + str(- playerIndex + 2) + " Wins!"
+		get_tree().paused = true
+		yield(get_tree().create_timer(1.0), "timeout")
+		get_tree().paused = false
+		winScreen.queue_free()
+		get_node("/root/BaseLevel").queue_free()
+		get_node("/root").add_child(menuScene.instance())
+		
+		
+# func GoToMainMenu():
 
 func shoot():
 	if (currentShot > 0):

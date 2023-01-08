@@ -46,6 +46,7 @@ extents = Vector2( 9.1876, 6 )
 scale = Vector2( 2, 2 )
 script = ExtResource( 1 )
 playerSuffix = "_2"
+playerIndex = 1
 
 [node name="CoyoteTimer" type="Timer" parent="."]
 wait_time = 0.1

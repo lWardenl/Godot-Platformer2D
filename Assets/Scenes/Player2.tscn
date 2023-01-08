@@ -46,6 +46,7 @@ extents = Vector2( 8.37521, 5.9805 )
 scale = Vector2( 2, 2 )
 script = ExtResource( 1 )
 playerSuffix = "_2"
+playerIndex = 2
 weaponPath = "res://Assets/Scenes/Rose.tscn"
 
 [node name="CoyoteTimer" type="Timer" parent="."]
